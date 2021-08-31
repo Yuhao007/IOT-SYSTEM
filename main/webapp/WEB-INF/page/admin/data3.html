@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <title>Monitoring data</title>
+    #parse("sys/header.html")
+    <script   src="https://lib.baomitu.com/echarts/4.0.4/echarts.min.js"></script>
+</head>
+<body>
+<div id="rrapp">
+
+    <div class="panel panel-warning" v-if="warn[type]">
+        <div class="panel-heading" style="background-color: orangered;color: #FFF">Warning！！！</div>
+        <div class="panel-body">
+            <div style="text-align: center; font-size: 16px;">
+                {{name}}：<span style="color: orangered;font-weight: bold;font-size: 18px;">{{now}}</span>Data exception<span
+                    style="color: orangered;font-weight: bold;font-size: 18px;">{{max}}</span>。
+            </div>
+        </div>
+    </div>
+
+    <div class="panel panel-warning" v-if="minwarn[type]">
+        <div class="panel-heading" style="background-color: orangered;color: #FFF">Warning！！！</div>
+        <div class="panel-body">
+            <div style="text-align: center; font-size: 16px;">
+                {{name}}：<span style="color: orangered;font-weight: bold;font-size: 18px;">{{now}}</span>Data exception<span
+                    style="color: orangered;font-weight: bold;font-size: 18px;">{{min}}</span>。
+            </div>
+        </div>
+    </div>
+
+
+
+    <audio preload="none" src="/statics/1.mp3" style="display: none;"  id="mp3"></audio>
+
+    <div class="panel panel-success"  >
+        <div class="panel-heading">Real-time data Monitoring</div>
+        <div class="panel-body">
+            <div id="main" style="height: 400px;width:auto; max-width: 850px; margin: auto"></div>
+        </div>
+    </div>
+
+
+</div>
+
+<script src="${rc.contextPath}/js/admin/data3.js?_${date.systemTime}"></script>
+</body>
+</html>

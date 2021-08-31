@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+<title>Administrator list</title>
+#parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+	<div v-show="showList">
+		<div class="grid-btn">
+			<div class="form-group col-sm-2">
+				<input type="text" class="form-control" v-model="q.username" @keyup.enter="query" placeholder="username">
+			</div>
+			<a class="btn btn-default" @click="query">Query</a>
+			#if($shiro.hasPermission("sys:user:save"))
+			<a class="btn btn-primary" @click="add"><i class="fa fa-plus"></i>&nbsp;Add</a>
+			#end
+			#if($shiro.hasPermission("sys:user:update"))
+			<a class="btn btn-primary" @click="update"><i class="fa fa-pencil-square-o"></i>&nbsp;Modify</a>
+			#end
+			#if($shiro.hasPermission("sys:user:delete"))
+			<a class="btn btn-primary" @click="del"><i class="fa fa-trash-o"></i>&nbsp;Delete</a>
+			#end
+		</div>
+	    <table id="jqGrid"></table>
+	    <div id="jqGridPager"></div>
+    </div>
+    
+    <div v-show="!showList" class="panel panel-success">
+		<div class="panel-heading">{{title}}</div>
+		<form class="form-horizontal">
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">Username</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.username" placeholder="Login account"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">Password</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.password" placeholder="Password"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">E-mail</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.email" placeholder="E-mail"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">Phone number</div>
+			   	<div class="col-sm-10">
+			      <input type="text" class="form-control" v-model="user.mobile" placeholder="Phone number"/>
+			    </div>
+			</div>
+			<div class="form-group">
+			   	<div class="col-sm-2 control-label">Role</div>
+			   	<div class="col-sm-10">
+				   	<label v-for="role in roleList" class="checkbox-inline">
+					  <input type="checkbox" :value="role.roleId" v-model="user.roleIdList">{{role.roleName}}
+					</label>
+				</div>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label">State</div>
+				<label class="radio-inline">
+				  <input type="radio" name="status" value="0" v-model="user.status"/> Forbidden
+				</label>
+				<label class="radio-inline">
+				  <input type="radio" name="status" value="1" v-model="user.status"/> Regular
+				</label>
+			</div>
+			<div class="form-group">
+				<div class="col-sm-2 control-label"></div> 
+				<input type="button" class="btn btn-primary" @click="saveOrUpdate" value="Sure"/>
+				&nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="Back"/>
+			</div>
+		</form>
+	</div>
+</div>
+
+<script src="${rc.contextPath}/js/sys/user.js?_${date.systemTime}"></script>
+</body>
+</html>

@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <title>Monitoring data</title>
+
+
+    #parse("sys/header.html")
+    <style>
+        .col-sm-4{
+            margin-bottom: 40px;
+        }
+        label{
+            margin-top: 12px;
+        }
+    </style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+
+
+    <div  class="panel panel-danger">
+        <div class="panel-heading">Data screening</div>
+        <form class="form-horizontal clearfix" onsubmit="return false" style="clear: both;padding: 40px 0"  >
+
+
+
+            <audio preload="none" src="/statics/1.mp3" style="display: none;"  id="mp3"></audio>
+
+            <div class="col-sm-4"  style="text-align: center;font-size: 18px;" >
+                <div>
+                     {{name1}}
+                </div>
+                <div>
+                    <label  class="label label-success" style="font-size: 25px;height: auto;">
+                        {{data1}}
+                    </label>
+                    <label for="" class="label label-danger" v-if="warn['1'] || minwarn['1']">Warning</label>
+                </div>
+
+            </div>
+            <div class="col-sm-4"  style="text-align: center;font-size: 18px;" >
+                <div>
+                    {{name2}}
+                </div>
+                <div>
+                    <label  class="label label-success" style="font-size: 25px;height: auto;">
+                        {{data2}}
+                    </label>
+                    <label for="" class="label label-danger" v-if="warn['2'] || minwarn['2']">Warning</label>
+                </div>
+            </div>
+            <div class="col-sm-4"  style="text-align: center;font-size: 18px;" >
+                <div>
+                    {{name3}}
+                </div>
+                <div>
+                    <label  class="label label-success" style="font-size: 25px;height: auto;">
+                        {{data3}}
+                    </label> <label for="" class="label label-danger" v-if="warn['3'] || minwarn['3']">Warning</label>
+                </div>
+            </div>
+            <div class="col-sm-4"  style="text-align: center;font-size: 18px;" >
+                <div>
+                    {{name4}}
+                </div>
+                <div>
+                    <label  class="label label-success" style="font-size: 25px;height: auto;">
+                        {{data4}}
+                    </label> <label for="" class="label label-danger" v-if="warn['4'] || minwarn['4']">Warning</label>
+                </div>
+            </div>
+            <div class="col-sm-4"  style="text-align: center;font-size: 18px;" >
+                <div>
+                    {{name5}}
+                </div>
+                <div>
+                    <label  class="label label-success" style="font-size: 25px;height: auto;">
+                        {{data5}}
+                    </label> <label for="" class="label label-danger" v-if="warn['5'] || minwarn['5']">Warning</label>
+                </div>
+            </div>
+            <div class="col-sm-4"  style="text-align: center;font-size: 18px;" >
+                <div>
+                    {{name6}}
+                </div>
+                <div>
+                    <label  class="label label-success" style="font-size: 25px;height: auto;">
+                        {{data6}}
+                    </label> <label for="" class="label label-danger" v-if="warn['6'] || minwarn['6']">Warning</label>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${rc.contextPath}/js/admin/all.js?_${date.systemTime}"></script>
+</body>
+</html>

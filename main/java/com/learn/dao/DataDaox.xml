@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<!-- Namespace goes to com.learn.dao.datadao
+and that's the name of the whole class of the interface that you want to correspond to-->
+<mapper namespace="com.learn.dao.DataDao">
+
+    <!--  -->
+    <resultMap type="com.learn.entity.DataEntity" id="dataMap">
+        <result property="id" column="id"/>
+        <result property="v" column="v"/>
+        <result property="type" column="type"/>
+        <result property="time" column="time"/>
+    </resultMap>
+
+    <select id="queryObject" resultType="com.learn.entity.DataEntity">
+		select * from data where id = #{value}
+	</select>
+
+    <select id="last" resultType="com.learn.entity.DataEntity">
+		select * from data where type = #{type}  order by time desc limit 1
+	</select>
+
+<!--    The ID corresponds to the corresponding method. The resultType is what object is the database returns to encapsulate
+Com. Learn. Entity. DataEntity full class name select on behalf of the query
+Com. Learn. Entity. DataEntity inside there are four attributes describe the corresponding also has four attributes attribute names are the same
+This data is the name of the table
+-->
+    <select id="queryList" resultType="com.learn.entity.DataEntity">
+        select * from data where 1=1
+        <if test="v != null and v != ''">
+            and v like '%${v}%'
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type}
+        </if>
+        <if test="begin != null and begin != ''">
+            and `time` > #{begin}
+        </if>
+        <if test="end != null and end != ''">
+            and #{end} `time`
+        </if>
+
+        order by time desc
+        <if test="offset != null and limit != null">
+            limit ${offset}, ${limit}
+        </if>
+    </select>
+
+    <select id="queryTotal" resultType="int">
+        select count(*) from data where 1=1
+        <if test="v != null and v != ''">
+            and v like '%${v}%'
+        </if>
+        <if test="type != null and type != ''">
+            and type = #{type}
+        </if>
+    </select>
+
+    <insert id="save" parameterType="com.learn.entity.DataEntity">
+		insert into data
+		(
+			`id`, 
+			`v`, 
+			`type`, 
+			`time`
+		)
+		values
+		(
+			#{id}, 
+			#{v}, 
+			#{type}, 
+			#{time}
+		)
+	</insert>
+
+    <update id="update" parameterType="com.learn.entity.DataEntity">
+        update data
+        <set>
+            <if test="v != null">`v` = #{v},</if>
+            <if test="type != null">`type` = #{type},</if>
+            <if test="time != null">`time` = #{time}</if>
+        </set>
+        where id = #{id}
+    </update>
+
+    <delete id="delete">
+		delete from data where id = #{value}
+	</delete>
+
+    <delete id="deleteBatch">
+        delete from data where id in
+        <foreach item="id" collection="array" open="(" separator="," close=")">
+            #{id}
+        </foreach>
+    </delete>
+
+</mapper>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <title>Monitoring data</title>
+    #parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+
+
+    <div  class="panel panel-success">
+        <div class="panel-heading">Control mode setting</div>
+        <form class="form-horizontal" onsubmit="return false">
+            <div style="padding: 50px 0;text-align: center">
+                <button class="btn btn-success" style="font-size: 22px;width: 200px" @click="query(1)">automatic</button>
+                <br><br>
+                <button class="btn btn-warning" style="font-size: 22px;width: 200px" @click="query(0)">manual</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${rc.contextPath}/js/admin/mode.js?_${date.systemTime}"></script>
+</body>
+</html>

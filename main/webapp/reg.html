@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8"/>
+    <title> Cold-chain transportation monitoring system </title>
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+
+    <!-- basic styles -->
+
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet"/>
+    <link rel="stylesheet" href="/assets/css/font-awesome.min.css"/>
+
+    <!--[if IE 7]>
+    <link rel="stylesheet" href="/assets/css/font-awesome-ie7.min.css"/>
+    <![endif]-->
+
+    <!-- page specific plugin styles -->
+
+    <!-- fonts -->
+
+    <link rel="stylesheet" href="/assets/css/http%20_fonts.googleapis.com_css%20family=Open+Sans%20400,300.css"/>
+
+    <!-- ace styles -->
+
+    <link rel="stylesheet" href="/assets/css/ace.min.css"/>
+    <link rel="stylesheet" href="/assets/css/ace-rtl.min.css"/>
+
+    <link rel="stylesheet" href="/assets/css/ace-ie.min.css"/>
+    <![endif]-->
+
+    <!-- inline styles related to this page -->
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+
+    <!--[if lt IE 9]>
+    <script src="/assets/js/html5shiv.js"></script>
+    <script src="/assets/js/respond.min.js"></script>
+    <![endif]-->
+
+
+    <style>
+        body{
+            background: url("/statics/bg.jpg") center center no-repeat;
+            background-size: 100% 100%;
+        }
+        .login-layout .widget-box{
+            background: none;
+        }
+    </style>
+
+
+
+    <script src="statics/libs/vue.min.js"></script>
+</head>
+
+<body class="login-layout">
+<div class="main-container" id="rrapp">
+    <div class="main-content">
+        <div class="row">
+            <div class="col-sm-10 col-sm-offset-1">
+                <div class="login-container">
+                    <div class="center">
+                        <h1>
+                            <i class="icon-leaf green"></i>
+                            <span class="red">Cold-chain transportation
+                                              monitoring system</span>
+                        </h1>
+                    </div>
+
+                    <div class="space-6"></div>
+
+                    <div class="position-relative">
+                        <div id="login-box" class="login-box visible widget-box no-border">
+                            <div class="widget-body">
+                                <div class="widget-main">
+                                    <h4 class="header blue lighter bigger">
+                                        <i class="icon-coffee green"></i>
+                                        Register
+                                    </h4>
+
+                                    <div class="space-6"></div>
+
+                                    <form id="loginForm" onsubmit="return false">
+                                        <fieldset>
+                                            <div class="form-group">
+                                                <label class="block clearfix">
+															<span class="block input-icon input-icon-right">
+																<input type="text" class="form-control" name="name"
+                                                                       v-model="username"
+                                                                       placeholder="user name" autofocus/>
+																<i class="icon-user"></i>
+															</span>
+                                                </label>
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label class="block clearfix">
+															<span class="block input-icon input-icon-right">
+																<input type="password" class="form-control"
+                                                                       v-model="password"
+                                                                       name="password" placeholder="password"/>
+																<i class="icon-lock"></i>
+															</span>
+                                                </label>
+
+                                            </div>
+                                            <div class="form-group">
+
+                                                <label class="block clearfix">
+															<span class="block input-icon input-icon-right">
+																<input type="password" class="form-control"
+                                                                       v-model="password2"
+                                                                       name="password" placeholder="new password"/>
+																<i class="icon-lock"></i>
+															</span>
+                                                </label>
+
+                                            </div>
+
+                                           <!-- <div class="form-group clearfix" id="validatediv">
+
+
+                                                <table>
+                                                    <tr>
+                                                        <td width="30%">
+																	<span class=" input-icon input-icon-right ">
+																		<input type="text" class="form-control "
+                                                                               v-model="captcha"
+                                                                               placeholder="验证码" name="randomCode"/>
+																	</span>
+                                                        </td>
+                                                        <td width="30%">
+                                                            <img id="validateImg" style="cursor: pointer;width: 130px"
+                                                                 :src="src"
+                                                                 @click="refreshCode"/>
+                                                        </td>
+                                                        <td width="40%" align="right">
+                                                            <span><a href="javascript:;"
+                                                                     @click="refreshCode">换一张</a>	</span>
+                                                        </td>
+
+                                                    </tr>
+                                                </table>-->
+
+
+                                            </div>
+                                            <div id="login_info" style="color:red;display: none;">
+                                                ddd
+                                            </div>
+                                            <div class="space"></div>
+
+                                            <div class="text-center">
+
+
+                                                <button type="submit" id="loginBtn"
+                                                        class="width-80  btn btn-sm btn-primary" @click="reg">
+                                                    <i class="icon-key"></i>
+                                                    Register
+                                                </button>
+                                            </div>
+
+                                            <div class="space-4"></div>
+                                        </fieldset>
+                                    </form>
+
+                                    <div class="social-or-login center">
+                                        <span class="bigger-110"> Notice </span>
+                                    </div>
+
+                                    <div class="social-login center">
+                                        <span>To ensure the security of your information
+                                            please do not reveal your user name and password</span>
+                                    </div>
+                                </div><!-- /widget-main -->
+
+                                <div class="toolbar clearfix">
+                                    <div>
+                                        <a href="login.html"  class="forgot-password-link">
+                                            <i class="icon-arrow-right"></i>
+                                            Back
+                                        </a>
+                                    </div>
+                                </div>
+                            </div><!-- /widget-body -->
+                        </div><!-- /login-box -->
+
+
+
+                    </div><!-- /position-relative -->
+                </div>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div>
+</div><!-- /.main-container -->
+
+<!-- basic scripts -->
+
+<!--[if !IE]> -->
+
+<script src="/assets/js/jquery-2.0.3.min.js"></script>
+<script src="/custom/js/jquery.extends.js"></script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script src="/assets/js/jquery-1.10.2.min.js"></script>
+<![endif]-->
+
+<!--[if !IE]> -->
+
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/assets/js/jquery-2.0.3.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- <![endif]-->
+
+<!--[if IE]>
+<script type="text/javascript">
+    window.jQuery || document.write("<script src='/assets/js/jquery-1.10.2.min.js'>" + "<" + "/script>");
+</script>
+<![endif]-->
+
+<script type="text/javascript">
+    if ("ontouchend" in document) document.write("<script src='/assets/js/jquery.mobile.custom.min.js'>" + "<" + "/script>");
+</script>
+
+<!-- inline scripts related to this page -->
+
+<script type="text/javascript">
+
+    var vm = new Vue({
+        el: '#rrapp',
+        data: {
+            username: null,
+            password: null,
+            password2: null,
+            captcha: null,
+            error: false,
+            errorMsg: null,
+            src: 'captcha.jpg'
+        },
+        beforeCreate: function () {
+            if (self != top) {
+                top.location.href = self.location.href;
+            }
+        },
+        created: function () {
+        },
+        methods: {
+            refreshCode: function () {
+                this.src = "captcha.jpg?t=" + $.now();
+            },
+            showError: function (msg) {
+                error(msg)
+            },
+            reg: function (event) {
+                hideError()
+                if (this.username == null) {
+                    vm.showError("Please enter your login account");
+                    return;
+                }
+                if (this.password == null) {
+                    vm.showError("Please enter the login password");
+                    return;
+                }
+                if (this.password2 == null) {
+                    vm.showError("Please enter your login password again");
+                    return;
+                }
+                if (this.password != this.password2) {
+                    vm.showError("Two different passwords");
+                    return;
+                }
+                if (this.captcha == null) {
+                    vm.showError("please enter the verification code");
+                    return;
+                }
+
+
+                var data = "username=" + this.username + "&password=" + this.password + "&captcha=" + this.captcha;
+                $.ajax({
+                    type: "POST",
+                    url: "sys/reg",
+                    data: data,
+                    dataType: "json",
+                    success: function (result) {
+                        if (result.code == 0) {//注册成功
+
+                            alert("Registered successfully");
+                            location.href='login.html'
+                        } else {
+                            error(result.msg)
+                        }
+                    }
+                });
+            }
+        }
+    });
+
+    var error = function (message) {
+        $("#login_info").html(message);
+        $("#login_info").fadeIn();
+    }
+    var hideError = function () {
+        $("#login_info").fadeOut();
+    }
+
+
+</script>
+</body>
+</html>

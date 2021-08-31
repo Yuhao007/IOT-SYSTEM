@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <title>Monitoring data</title>
+    #parse("sys/header.html")
+    <style>
+        #input_jqGridPager *{
+            padding: 0 12px;
+            display: none;
+            color: #FFF;
+        }
+        #input_jqGridPager{
+            padding: 0 4px;
+            color: #FFF;
+        }
+        #jqGridPager_left{
+            display: none;
+        }
+        #jqGrid_rn{
+            width: 33px !important;
+        }
+    </style>
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn" style="margin-top: 20px">
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" v-model="q.begin"
+                       onclick="layui.laydate({elem: this, lang:'en',istime: true, format: 'YYYY-MM-DD hh:mm:ss', choose: function(date){vm.q.begin=date;}})"
+                       @keyup.enter="query" placeholder="start time">
+            </div>
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" v-model="q.end" @keyup.enter="query"
+                       onclick="layui.laydate({elem: this, lang:'en', istime: true, format: 'YYYY-MM-DD hh:mm:ss', choose: function(date){vm.q.end=date;}})"
+                       placeholder="end time">
+            </div>
+            <a class="btn btn-default" @click="query">query</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-success">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">data value</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" :disabled="showInfo" v-model="data.v" placeholder="data value"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">Collect time</div>
+                <div class="col-sm-10">
+                    <input type="text" class="form-control" :disabled="showInfo" v-model="data.time"
+                           onclick="layui.laydate({elem: this, lang:'en', istime: true, format: 'YYYY-MM-DD hh:mm:ss', choose: function(date){vm.data.time=date;}})"
+                           placeholder="collect time"/>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                <input type="button" class="btn btn-primary" @click="saveOrUpdate" value="Sure" v-if="!showInfo"/>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="Back"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${rc.contextPath}/js/admin/data2.js?_${date.systemTime}"></script>
+</body>
+</html>

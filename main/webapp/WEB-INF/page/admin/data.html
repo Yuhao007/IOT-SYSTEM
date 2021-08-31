@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<html>
+<head>
+    <title>Monitoring data</title>
+    #parse("sys/header.html")
+</head>
+<body>
+<div id="rrapp" v-cloak>
+    <div v-show="showList">
+        <div class="grid-btn">
+            <div class="form-group col-sm-2">
+                <input type="text" class="form-control" v-model="q.v" @keyup.enter="query" placeholder="Key word">
+            </div>
+            <a class="btn btn-default" @click="query">Query</a>
+            <a class="btn btn-primary" @click="info"><i class="fa fa-info"></i>Details</a>
+        </div>
+        <table id="jqGrid"></table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div v-show="!showList" class="panel panel-success">
+        <div class="panel-heading">{{title}}</div>
+        <form class="form-horizontal">
+            <div class="form-group">
+                <div class="col-sm-2 control-label">Data value：</div>
+                <div class="col-sm-10  form-control-static">
+                    {{data.v}}
+                    <span v-if="type == 1">Read</span>
+                    <span v-if="type == 2">%</span>
+                    <span v-if="type == 3">mg/m3</span>
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label">Collect time</div>
+                <div class="col-sm-10 form-control-static">
+                    {{data.time}}
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-sm-2 control-label"></div>
+                &nbsp;&nbsp;<input type="button" class="btn btn-warning" @click="reload" value="Back"/>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script src="${rc.contextPath}/js/admin/data.js?_${date.systemTime}"></script>
+</body>
+</html>
