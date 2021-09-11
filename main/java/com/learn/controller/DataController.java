@@ -2,7 +2,6 @@ package com.learn.controller;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.JSONObject;
-//数据操作在这些引入包里边
 import com.learn.dao.DataDao;
 import com.learn.entity.DataEntity;
 import com.learn.service.DataService;
@@ -39,7 +38,7 @@ public class DataController extends AbstractController implements ApplicationLis
     private DataService dataService;
 
     /**
-     * 列表
+     * list
      */
     //
     @RequestMapping("/list")
@@ -47,14 +46,14 @@ public class DataController extends AbstractController implements ApplicationLis
     public R list(@RequestParam Map<String, Object> params) {
 
 
-        //查询列表数据
+        //query list
         Query query = new Query(params);
         /**
-         * 这里调用了service的方法   service是一个接口 调用这个接口 因为有spring 会自动调用这个接口的实现类
-         * 因为在这个项目中接口的实现类只有一个 所以可以唯一定位
+         * Service is an interface that calls this interface because Spring automatically calls the implementation class of this interface
+         * Because there is only one implementation class for the interface in this project, it can be uniquely positioned
          */
         List<DataEntity> dataList = dataService.queryList(query);
-        //接口返回值，一般是前端需要的值，这里就是包里边的方法
+        //The value returned by the interface, usually the value needed by the front end, is the method inside the package
         int total = dataService.queryTotal(query);
 
         PageUtils pageUtil = new PageUtils(dataList, total, query.getLimit(), query.getPage());
