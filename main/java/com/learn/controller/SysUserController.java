@@ -17,14 +17,14 @@ import java.util.List;
 import java.util.Map;
 
 /**
- * 系统用户
+ * sys user
  *
- * @date 31日 上午10:40:10
+ * @date 
  */
 @RestController
-//这个参数的意思是指 映射一个地址给前端调用 比用这里 前端调用的地址就是
-//http://127.0.0.1:8080/sys/user 这个就是这个contaoller的前缀
-// 要调用具体的方法 就还要在方法上面 配置这个参数
+// This parameter is used to map an address to the front-end call This is the contaoller prefix 
+// http://127.0.0.1:8080/sys/user
+// To call a specific method, you need to configure this parameter on the method
 @RequestMapping("/sys/user")
 public class SysUserController extends AbstractController {
     @Autowired
@@ -33,15 +33,15 @@ public class SysUserController extends AbstractController {
     private SysUserRoleService sysUserRoleService;
 
     /**
-     * 所有用户列表
+     * all user list
      */
-    //    映射一个地址给前端调用 http://127.0.0.1:8080/sys/user/list 里面就是具体的任务逻辑
-    //@RequestParam 这个就是用来配置 接收前端的参数 将前端传的参数封装到一个map里面 比如前端传了一个id
-    //这里就可以通过params.get("id")获得值
+    //   An address mapping to the front-end calls http://127.0.0.1:8080/sys/user/list inside logic is specific tasks
+    //@requestParam this is used to configure the parameters of the receiving front end to encapsulate the parameters of the front end into a map, such as the front end to pass an ID
+    //Get ("id") to get the value
     @RequestMapping("/list")
     public R list(@RequestParam Map<String, Object> params) {
 
-        //查询列表数据
+        //query list
         Query query = new Query(params);
         List<SysUserEntity> userList = sysUserService.queryList(query);
         int total = sysUserService.queryTotal(query);
@@ -54,7 +54,7 @@ public class SysUserController extends AbstractController {
     @RequestMapping("/list2")
     public R list2(@RequestParam Map<String, Object> params) {
 
-        //查询列表数据
+        //query list
         Query query = new Query(params);
         List<SysUserEntity> userList = sysUserService.queryList(query);
 
@@ -62,7 +62,7 @@ public class SysUserController extends AbstractController {
     }
 
     /**
-     * 获取登录的用户信息
+     * get login information
      */
     @RequestMapping("/info")
     public R info() {
@@ -77,42 +77,42 @@ public class SysUserController extends AbstractController {
     }
 
     /**
-     * 修改登录用户密码
+     * Change the password of a login user
      */
-    //    映射一个地址给前端调用 http://127.0.0.1:8080/sys/user/password 里面就是具体的任务逻辑
-    //    这样写的话  前端传的值 它的key只能为password 和newPassword 才能意义对应
+    //    An address mapping to the front-end calls http://127.0.0.1:8080/sys/user/password inside logic is specific tasks
+    //   In this way, the key of the value passed by the front end can only be password and newPassword
 
     //    public R password(@RequestParam("password11")String password, String newPassword)
-    //      这样写的话 前端传的key就是password11 但是你可以自定义命名为password
+    //      So the key that's going to be passed in front is password11 but you can call it password if you want
     @RequestMapping("/password")
     public R password(String password, String newPassword) {
         Assert.notNull(newPassword, "The new password cannot be empty");
 
-        //sha256加密
+        //sha256
         password = new Sha256Hash(password).toHex();
-        //sha256加密
+        //sha256
         newPassword = new Sha256Hash(newPassword).toHex();
 
-        //更新密码
+        //update password
         int count = sysUserService.updatePassword(getUserId(), password, newPassword);
         if (count == 0) {
             return R.error("The original password is incorrect");
         }
 
-        //退出
+        //exit
         ShiroUtils.logout();
 
         return R.ok();
     }
 
     /**
-     * 用户信息
+     * information for user
      */
     @RequestMapping("/info/{userId}")
     public R info(@PathVariable("userId") Long userId) {
         SysUserEntity user = sysUserService.queryObject(userId);
 
-        //获取用户所属的角色列表
+        //Gets the role list to which the user belongs
         List<Long> roleIdList = sysUserRoleService.queryRoleIdList(userId);
         user.setRoleIdList(roleIdList);
 
@@ -120,7 +120,7 @@ public class SysUserController extends AbstractController {
     }
 
     /**
-     * 保存用户
+     * save user
      */
     @RequestMapping("/save")
     public R save(@RequestBody SysUserEntity user) {
@@ -132,7 +132,7 @@ public class SysUserController extends AbstractController {
     }
 
     /**
-     * 修改用户
+     * modify user
      */
     @RequestMapping("/update")
     public R update(@RequestBody SysUserEntity user) {
